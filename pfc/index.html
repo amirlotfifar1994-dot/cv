@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- Helps avoid stale local cache when replacing folders in XAMPP. -->
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>PFC-Limbic Flexibility Dashboard</title>
+
+    <link rel="icon" href="./favicon.ico" />
+
+    <!-- Bundled app styles -->
+<!-- Extra CSS to stabilize layout + add the desktop contents drawer -->
+<!-- IMPORTANT: use classic script so it works even via file:// (local use) -->
+
+    <!-- Local styles (no CDN) -->
+    <link rel="stylesheet" href="./css/style.css?v=20260208-4" />
+
+    <!-- Local scripts (no CDN) -->
+    <script defer src="./js/app.js?v=20260208-4"></script>
+    <script defer src="./js/toc-drawer.js?v=20260208-4"></script>
+    <!-- Forces an initial layout/resize pass so charts and breakpoints don't "wake up" only after interaction. -->
+    <script defer src="./js/boot-resize.js?v=20260208-4"></script>
+  </head>
+
+  <body>
+    <noscript>
+      This dashboard needs JavaScript enabled.
+    </noscript>
+
+    <div id="root"></div>
+
+    <!-- Desktop/Windows-friendly "Contents" drawer (works alongside the in-app sidebar) -->
+    <button id="pfc-toc-fab" class="pfc-toc-fab" type="button" aria-haspopup="dialog" aria-controls="pfc-toc-drawer" aria-expanded="false">
+      Contents
+    </button>
+
+    <div id="pfc-toc-overlay" class="pfc-toc-overlay" hidden></div>
+
+    <aside id="pfc-toc-drawer" class="pfc-toc-drawer" aria-hidden="true" role="dialog" aria-label="Contents">
+      <div class="pfc-toc-header">
+        <div class="pfc-toc-title">
+          <div class="pfc-toc-badge">Navigation</div>
+          <div class="pfc-toc-heading">Contents</div>
+          <div class="pfc-toc-sub">Scrollable, grouped sections</div>
+        </div>
+        <button id="pfc-toc-close" class="pfc-toc-close" type="button" aria-label="Close contents">&#215;</button>
+      </div>
+
+      <div class="pfc-toc-body">
+        <nav id="pfc-toc-nav" class="pfc-toc-nav" aria-label="Section navigation"></nav>
+      </div>
+
+      <div class="pfc-toc-footer">
+        <div class="pfc-toc-hint">Tip: Ctrl+K toggles this drawer</div>
+      </div>
+    </aside>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E.M.E.R.G.E+ Dashboard | Interactive Simulator</title>
+
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">E+</div>
+        <div class="title">
+          <h1>E.M.E.R.G.E+ Dashboard (Interactive Simulator)</h1>
+          <p>All charts are point-based and always active: move the mouse anywhere to get values (hover is not “near-point only”).</p>
+        </div>
+      </div>
+      <div class="controls">
+        <span class="pill" id="metaPill">…</span>
+        <button class="btn" id="themeToggle">Light</button>
+        <button class="btn" id="exportAll" title="Export all charts as PNG">Export PNG</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Quick Summary</h2>
+      <p class="sub">No CDN dependencies. No Tailwind CDN errors. No Plotly. Just local HTML/CSS/JS.</p>
+      <div class="grid cols-3">
+        <div class="kv"><div class="k">Status</div><div class="v">Interactive (Hover Always On)</div></div>
+        <div class="kv"><div class="k">Chart type</div><div class="v">Points / Scatter</div></div>
+        <div class="kv"><div class="k">Hover mode</div><div class="v">Anywhere → closest x (all series)</div></div>
+      </div>
+    </div>
+
+    <div class="section" id="paper">
+      <h2>Paper Overview</h2>
+      <p class="sub">A short, human-readable summary of the EMERGE+ framework that generated these simulated outputs.</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Core idea</h3>
+          <ul class="list">
+            <li><b>Dual-process meaning:</b> a fast “routine” channel and a slower “transformative” channel that can reshape meaning over time.</li>
+            <li><b>Entropy can rise without killing meaning:</b> the model proposes an “entropy detour” where entropy increases during disruption but meaning can remain high and later stabilize.</li>
+            <li><b>What you see here:</b> simulated trajectories for inputs (E, C), meaning (M), and entropy (H) in both regimes, plus culture/group effects and parameter sensitivity.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Testable prediction highlighted by the paper</h3>
+          <ul class="list">
+            <li><b>Biphasic entropy response:</b> entropy increases near the peak, then decreases later (potentially below baseline) during recovery/integration.</li>
+            <li><b>Meaningful experience link:</b> the post-peak entropy decrease is proposed to correlate with measures like MEQ30 (mystical experience questionnaires).</li>
+            <li><b>Interpretation:</b> higher entropy is not “better” by itself. The later decrease matters for durable change.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="routine">
+      <h2>Routine Regime</h2>
+      <p class="sub">Three main plots: inputs, meaning/ψ, and entropy. All point-based and interactive.</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>Inputs (E, C) vs time</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="routine-inputs-chart"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>Meaning and ψ vs time</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="routine-meaning-chart"></div>
+        </div>
+
+        <div class="card" style="grid-column:1 / -1">
+          <div class="cardHeaderRow">
+            <h3>Entropy (H_e, H_c) vs time</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="routine-entropy-chart" data-height="340"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="transformative">
+      <h2>Transformative Regime</h2>
+      <p class="sub">Drug profile (log-scale), transformative meaning, and related dynamics. Interactive everywhere.</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>Drug profile (D) vs time (log)</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="transform-drug-chart"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>Transform meaning (M_t) vs time</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="transform-meaning-chart"></div>
+        </div>
+
+        <div class="card" style="grid-column:1 / -1">
+          <div class="cardHeaderRow">
+            <h3>H_e with (E, C) vs time</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="transform-entropy-chart" data-height="340"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="cultural">
+      <h2>Culture / Group Effects</h2>
+      <p class="sub">This dataset has only two groups, but the plot is still fully interactive.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>Outcomes vs ψ0</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="cultural-chart"></div>
+        </div>
+
+        <div class="card">
+          <h3>Culture table</h3>
+          <div id="cultureTable"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="sensitivity">
+      <h2>Parameter Sensitivity</h2>
+      <p class="sub">Effect of α_E on time-to-threshold, final meaning, and final entropy. Everything stays inside its container (no runaway resizing).</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>M_r_final vs α_E</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="sens-meaning-chart"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardHeaderRow">
+            <h3>time_to_M &gt; 0.40 vs α_E</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="sens-time-chart"></div>
+        </div>
+
+        <div class="card" style="grid-column:1 / -1">
+          <div class="cardHeaderRow">
+            <h3>H_e_final vs α_E</h3>
+            <button class="btn" data-export>PNG</button>
+          </div>
+          <div id="sens-entropy-chart" data-height="340"></div>
+        </div>
+
+        <div class="card" style="grid-column:1 / -1">
+          <h3>Sensitivity table</h3>
+          <div id="sensTable"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Tip: If you ever see a totally static PNG again, it means something is still linked to an image export instead of the live canvas plots.
+    </div>
+  </div>
+
+  <script src="./assets/data.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+</html>
